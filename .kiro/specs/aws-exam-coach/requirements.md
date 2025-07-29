@@ -75,11 +75,12 @@ AWS Exam Coach は、AI エージェントによる自動問題生成を核と�
 
 #### Acceptance Criteria
 
-1. WHEN AI エージェントが問題を生成する THEN システム SHALL 問題の正確性、明確性、Professional レベルに適した難易度を自動検証する
-2. WHEN 問題が生成される THEN システム SHALL AWS 公式ドキュメントおよび Solutions Architect - Professional 試験ガイドとの整合性を確認する
-3. WHEN 問題の品質に問題がある THEN システム SHALL 自動的に問題を修正または再生成する
-4. IF 複数回の再生成でも品質基準を満たさない THEN システム SHALL エラーログを記録し、管理者に通知する
-5. IF 生成された問題が既存の問題と類似度が高い THEN システム SHALL 重複を避けるため問題を再生成する
+1. WHEN AI エージェントが問題を生成する THEN システム SHALL Amazon Bedrock Citations API を使用して AWS 公式ドキュメントとの整合性を自動検証する
+2. WHEN 品質検証を実行する THEN システム SHALL LLM による技術的正確性チェックと引用元情報を取得する
+3. WHEN 問題の品質に問題がある THEN システム SHALL 具体的な問題点と参照すべき公式ドキュメントを示して自動修正または再生成する
+4. WHEN 解説を生成する THEN システム SHALL Citations API を活用して引用元（ページ番号、具体的な文章）を含む詳細な解説を作成する
+5. IF 複数回の再生成でも品質基準を満たさない THEN システム SHALL エラーログと引用元情報を記録し、管理者に通知する
+6. IF 生成された問題が既存の問題と類似度が高い THEN システム SHALL 重複を避けるため問題を再生成する
 
 ### Requirement 6
 

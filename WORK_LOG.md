@@ -6,6 +6,7 @@
 - [2025 年 7 月 26 日 - ステアリング設定](#2025-年-7-月-26-日---ステアリング設定)
 - [2025 年 7 月 27 日 - AWS MCP Server 設定・動作確認](#2025-年-7-月-27-日---aws-mcp-server-設定動作確認)
 - [2025 年 7 月 28 日 - 要件定義・プロダクト方向性の確定](#2025-年-7-月-28-日---要件定義プロダクト方向性の確定)
+- [2025 年 7 月 29 日 - 設計書作成・AWS Pricing MCP Server 追加](#2025-年-7-月-29-日---設計書作成aws-pricing-mcp-server-追加)
 - [現在の環境状況](#現在の環境状況-1)
 - [次回作業予定](#次回作業予定)
 
@@ -147,6 +148,64 @@ aws-exam-coach/
 
 ---
 
+## 2025 年 7 月 29 日 - 設計書作成・AWS Pricing MCP Server 追加
+
+### 完了した作業
+
+#### Spec 作成ワークフロー - 設計フェーズ
+
+- **設計書作成開始**: `.kiro/specs/aws-exam-coach/design.md`
+- **アーキテクチャ設計**: Power Automate + Teams 連携システム
+- **AI 問題生成エンジン詳細設計**: Bedrock AgentCore + Strands Agents 構成
+- **問題生成トリガー設計**: スケジュール・HTTP API・Teams コマンド方式
+
+#### 技術スタック確定
+
+**AI エージェント基盤:**
+
+- **エージェントフレームワーク**: Strands Agents (オープンソース)
+- **実行環境**: AWS Bedrock AgentCore Runtime (Preview)
+- **LLM**: Amazon Bedrock (Claude 4 Sonnet, Claude 3.7 Sonnet)
+
+**バックエンド:**
+
+- **言語**: Python 3.11+
+- **フレームワーク**: Strands Agents SDK + FastAPI
+- **データベース**: PostgreSQL (問題・解析データ)
+- **キャッシュ**: Redis (情報取得キャッシュ)
+
+#### AWS Pricing MCP Server 追加
+
+- **MCP Server 追加**: `awslabs.aws-pricing-mcp-server@latest`
+- **設定完了**: `.kiro/settings/mcp.json` に追加
+- **自動承認設定**: `get_pricing` ツール
+- **用途**: 設計段階でのコスト試算・技術選択支援
+
+#### 設計書進捗状況
+
+**完了セクション:**
+
+- Overview (システム概要・設計原則)
+- Architecture (全体構成・主要コンポーネント)
+- AI 問題生成エンジン詳細設計 (技術スタック・システム構成・シーケンス図)
+- 問題生成トリガー設計 (3 つのトリガー方式)
+
+**次回作業予定:**
+
+- Teams 連携システム詳細
+- Data Models
+- Error Handling
+- Testing Strategy
+
+### 重要な技術決定
+
+1. **Strands Agents 採用**: オープンソースエージェントフレームワーク
+2. **Bedrock AgentCore Runtime**: サーバーレス実行環境
+3. **MCP 統合**: 標準化されたコンテキスト提供プロトコル
+4. **段階的トリガー実装**: HTTP API → Power Automate スケジュール → Teams コマンド
+
+---
+
 ## 現在の環境状況
 
 ### プロジェクト構成
@@ -157,10 +216,11 @@ aws-exam-coach/
 ├── .gitignore               # Git除外設定
 ├── .kiro/
 │   ├── settings/
-│   │   └── mcp.json         # MCP Server設定（4サーバ）
+│   │   └── mcp.json         # MCP Server設定（5サーバ）
 │   ├── specs/
 │   │   └── aws-exam-coach/
-│   │       └── requirements.md  # 要件定義完了
+│   │       ├── requirements.md  # 要件定義完了
+│   │       └── design.md        # 設計書作成中
 │   └── steering/
 │       ├── project-context.md
 │       └── work-log-reference.md
@@ -171,7 +231,7 @@ aws-exam-coach/
 ### 技術環境
 
 - **GitHub**: リポジトリ連携完了
-- **MCP Server**: 4 つのサーバが正常動作（AWS 関連のみ、公式・信頼できるもの）
+- **MCP Server**: 5 つのサーバが正常動作（AWS 関連のみ、公式・信頼できるもの）
 - **開発ツール**: uv/uvx, npx 利用可能
 - **Kiro ステアリング**: セッション継続性確保
 
@@ -180,6 +240,7 @@ aws-exam-coach/
 - **AWS 認定試験知識ベース検索** (AWS Knowledge MCP)
 - **AWS 公式ドキュメント参照** (AWS Documentation MCP)
 - **AWS 構成図自動生成** (AWS Diagram MCP)
+- **AWS 料金情報取得** (AWS Pricing MCP)
 - **Git 操作** (Git MCP)
 
 ---
@@ -189,23 +250,23 @@ aws-exam-coach/
 ### Spec 作成ワークフロー継続
 
 1. ✅ **要件定義** (`requirements.md`) - 完了
-2. 🔄 **設計書作成** (`design.md`) - 次回作業
+2. 🔄 **設計書作成** (`design.md`) - 作成中
 3. ⏳ **タスクリスト作成** (`tasks.md`)
 
 ### 設計フェーズの重点項目
 
-- Power Automate + Teams 連携アーキテクチャ
-- AI エージェントによる問題生成システム設計
-- リアクション収集・解析機能設計
-- スレッド議論促進機能設計
+- Teams 連携システム詳細
+- Data Models
+- Error Handling
+- Testing Strategy
 
 ### 備考
 
 - GitHub Personal Access Token 期限: 2025 年 10 月頃
+- 全 MCP サーバ動作確認済み（AWS 公式のみ）
 - 要件定義完了、設計フェーズ準備完了
-- 組織内コラボレーション学習プラットフォームとして方向性確定
 
 ---
 
 **作業者**: kobank-t  
-**最終更新**: 2025 年 7 月 28 日
+**最終更新**: 2025 年 7 月 29 日

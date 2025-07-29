@@ -2,14 +2,22 @@
   "mcpServers": {
     "git": {
       "command": "uvx",
-      "args": ["mcp-server-git", "--repository", "."],
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "/Users/kobayashi-tak/workspace/ai-coding/aws-exam-coach"
+      ],
       "env": {},
       "disabled": false,
-      "autoApprove": []
+      "autoApprove": [
+        "git_status"
+      ]
     },
     "aws-docs": {
       "command": "uvx",
-      "args": ["awslabs.aws-documentation-mcp-server@latest"],
+      "args": [
+        "awslabs.aws-documentation-mcp-server@latest"
+      ],
       "env": {
         "FASTMCP_LOG_LEVEL": "ERROR"
       },
@@ -18,19 +26,40 @@
     },
     "aws-knowledge": {
       "command": "npx",
-      "args": ["mcp-remote", "https://knowledge-mcp.global.api.aws"],
+      "args": [
+        "mcp-remote",
+        "https://knowledge-mcp.global.api.aws"
+      ],
       "env": {},
       "disabled": false,
-      "autoApprove": []
+      "autoApprove": [
+        "aws___search_documentation",
+        "aws___read_documentation"
+      ]
     },
     "aws-diagram": {
       "command": "uvx",
-      "args": ["awslabs.aws-diagram-mcp-server@latest"],
+      "args": [
+        "awslabs.aws-diagram-mcp-server@latest"
+      ],
       "env": {
         "FASTMCP_LOG_LEVEL": "ERROR"
       },
       "disabled": false,
       "autoApprove": []
+    },
+    "aws-pricing": {
+      "command": "uvx",
+      "args": [
+        "awslabs.aws-pricing-mcp-server@latest"
+      ],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "get_pricing"
+      ]
     }
   }
 }
